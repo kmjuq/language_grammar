@@ -1,1 +1,2 @@
 hello
+Value: /Library/Java/JavaVirtualMachines/openjdk.jdk/Contents/Home

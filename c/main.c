@@ -1,12 +1,8 @@
-//
-//  main.c
-//  study
-//
-//  Created by kmj on 2022/12/2.
-//
-
 #include <stdio.h>
 #include <stdlib.h>
+// extern 说明符
+// 在当前文件中声明，这个变量是其他文件定义的，告诉编译器，不需要在这里为它分配内存空间。
+extern int a[];
 // 宏
 #define PI 3.14
 #define SQUARE(X) X*X
@@ -106,11 +102,16 @@ int main() {
     printf("Compiled on: %s %s\n", __DATE__, __TIME__);
     printf("C Version: %ld\n", __STDC_VERSION__);
     freopen("output.txt","w",stdout);
-    printf("hello");
+    printf("hello\n");
     const double PI1 = 3.14159;
     const int arr[] = {1,2,3,4};
     int* const x; // 表示指针包含的地址不可修改
     const int* y; // 表示指针指向的值不可修改
     const char* const c; // 表示内存地址以及指向的值都不可修改
+    char* val = getenv("JAVA_HOME");
+    printf("Value: %s\n",val);
+    char* s = "春天";
+    printf("%s\n",s);
+    return 0;
 }
 
