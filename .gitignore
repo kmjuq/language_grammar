@@ -1,1 +1,10 @@
+
+# 依赖目录
+node_modules/
+target/
 c/main
+
+# 其他可能的临时文件或生成文件
+*.log
+*.tmp
+*.temp
