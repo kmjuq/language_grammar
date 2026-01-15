@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"fmt"
+	folderUtil "grammar/folder"
 	"time"
 )
 
@@ -20,12 +21,21 @@ var folder embed.FS
 
 func 变量声明() {
 	fmt.Println("-- 变量声明 --")
+	// := 短变量声明 声明 + 赋值二合一;只能用在函数内的局部变量;
+	// = 是单纯的赋值操作; var 是变量申明
 	var a = "initial"
-	var b, c int = 1, 2
+	var e, c int = 1, 2
+	d := 3
 	// 该声明 相当于 var i = 1 或者 var i int = 1
-	i := 1
+	g := 1
 	// 消费变量，go 语言中不允许有未使用的变量
-	fmt.Println(a, b, c, i)
+	fmt.Println(a, e, c, d, g)
+
+	var i int
+	var f float64
+	var b bool
+	var s string
+	fmt.Printf("%v %v %v %q\n", i, f, b, s)
 }
 
 func 常量声明() {
@@ -201,6 +211,7 @@ func embed资源文件嵌入() {
 	fmt.Println("-- embed directive --")
 	print(fileString)
 	print(string(fileByte))
+
 	content1, _ := folder.ReadFile("folder/file1.hash")
 	print(string(content1))
 	content2, _ := folder.ReadFile("folder/file2.hash")
@@ -217,22 +228,30 @@ func panic语法() {
 	panic("a problem")
 }
 
+func 方法权限() {
+	// 大写开头的方法就是被公开的方法
+	folderUtil.PublicFunc()
+	// 小写的就是私有方法
+	// folderUtil.privateFunc()
+}
+
 func main() {
 	变量声明()
-	常量声明()
-	for循环()
-	ifelse分支()
-	switch分支()
-	数组结构()
-	切片结构()
-	map结构()
-	range结构()
-	函数语法()
-	struct结构()
-	接口()
-	goroutine()
-	channel()
-	defer语法()
-	embed资源文件嵌入()
-	panic语法()
+	// 常量声明()
+	// for循环()
+	// ifelse分支()
+	// switch分支()
+	// 数组结构()
+	// 切片结构()
+	// map结构()
+	// range结构()
+	// 函数语法()
+	// struct结构()
+	// 接口()
+	// goroutine()
+	// channel()
+	// defer语法()
+	// embed资源文件嵌入()
+	// panic语法()
+	// 方法权限()
 }
