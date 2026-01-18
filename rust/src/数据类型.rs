@@ -128,6 +128,7 @@ pub fn 使用As完成类型转换() {
     // 最常用于将原始类型转换为其他原始类型
 }
 
+#[allow(dead_code)]
 pub fn 复杂类型() {
     // 元组 元组一般用来组织联系比较紧密的数据，比如二位坐标系的x,y、颜色空间的rgb三原色、IP地址等业务场景
     let coordinate = (10, 25);
@@ -230,6 +231,7 @@ pub fn 复杂类型() {
     println!("numArr {:?}", num_arr[3]);
 }
 
+#[allow(dead_code)]
 pub fn 通过参数创建结构体的简化语法() {
     // 当参数和结构体字段同名时，可以使用简化语法
     struct Person {
@@ -249,6 +251,7 @@ pub fn 通过参数创建结构体的简化语法() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 通过已有结构体实例创建新实例的简化语法() {
     #[derive(Debug)]
     struct Person {

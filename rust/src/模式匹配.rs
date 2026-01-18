@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 pub fn 基本使用场景() {
     // 模式匹配功能就是方便我们从某些数据结构中取数的
     // 最常使用的是 match 表达式以及 if let.
@@ -62,6 +63,7 @@ pub fn matches宏的使用() {
     println!("matches!宏的使用 {:?}", val);
 }
 
+#[allow(dead_code)]
 pub fn 全模式列表() {
     匹配字面量();
     匹配命名变量();
@@ -108,6 +110,7 @@ pub fn 通过序列匹配值的范围() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 解构() {
     // 解构结构体
     struct Point {
@@ -165,6 +168,7 @@ pub fn 解构() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 忽略剩余值() {
     struct Point {
         x: i32,
@@ -184,6 +188,7 @@ pub fn 忽略剩余值() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 匹配护卫() {
     let x = Some(5);
     let y = 10;
@@ -202,6 +207,7 @@ pub fn 匹配护卫() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 解构时绑定变量() {
     // 当你既想要限定分支范围，又想要使用分支的变量时，就可以用 @ 来绑定到一个新的变量上。
     enum Message {

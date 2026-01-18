@@ -1,11 +1,12 @@
 use std::{
     fmt::{self, Debug, Display},
-    iter::Sum,
 };
 
+#[allow(dead_code)]
 pub fn 泛型语法() {
     // 结构体中的泛型语法
     #[derive(Debug)]
+    #[allow(dead_code)]
     struct Point<T> {
         x: T,
         y: T,
@@ -21,6 +22,7 @@ pub fn 泛型语法() {
 /// trait 关键字是用来定义特征的，特征类似于java的接口，用来抽象行为
 /// 比如 你无法在当前作用域中，为 String 类型实现 Display 特征，因为它们俩都定义在标准库中。
 /// 特征的方法可以有默认实现，java8的接口的默认实现类似
+#[allow(dead_code)]
 pub fn 特征的基本使用() {
     // 特征定义的语法
     pub trait Summary {
@@ -80,6 +82,7 @@ pub fn 特征的基本使用() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 特征约束() {
     pub trait Summary {
         fn summarize(&self) -> String;
@@ -142,6 +145,7 @@ pub fn 特征约束() {
 }
 
 /// 只能返回单一的具体类型，只是用来简化返回类型，比如说返回是迭代器或者闭包
+#[allow(dead_code)]
 pub fn 函数可以返回impl_trait() {
     pub fn display() -> impl ToString {
         62
@@ -189,6 +193,7 @@ pub fn 特征对象() {
     screen.run();
 }
 
+#[allow(dead_code)]
 pub fn 关联类型() {
     pub trait CacheableItem: Clone + Default + fmt::Debug {
         type Address: AsRef<[u8]> + Clone + fmt::Debug + Eq;
@@ -196,6 +201,7 @@ pub fn 关联类型() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 默认泛型参数() {
     trait Add<RHS = Self> {
         type Output;
@@ -204,6 +210,7 @@ pub fn 默认泛型参数() {
     }
 }
 
+#[allow(dead_code)]
 pub fn 调用不同特征的同名方法() {
     trait Pilot {
         fn fly(&self);
@@ -261,6 +268,7 @@ pub fn 调用不同特征的同名方法() {
 }
 
 /// 特征有个孤儿原则，如果你想要为类型 A 实现特征 T，那么 A 或者 T 至少有一个是在当前作用域中定义的！
+#[allow(dead_code)]
 pub fn 绕过孤儿原则() {
     // 绕过孤儿原则，给 Vec<String> 类型添加 Display 特征，通过创建 Wrapper 包装结构体
     struct Wrapper(Vec<String>);

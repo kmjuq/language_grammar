@@ -21,8 +21,9 @@ var folder embed.FS
 
 func 变量声明() {
 	fmt.Println("-- 变量声明 --")
-	// := 短变量声明 声明 + 赋值二合一;只能用在函数内的局部变量;
+	// := 短变量声明 声明 + 赋值二合一; 只能用在函数内的"局部""变量";
 	// = 是单纯的赋值操作; var 是变量申明
+	// := 在接受函数调用的多返回值时比较好用
 	var a = "initial"
 	var e, c int = 1, 2
 	d := 3
@@ -31,18 +32,16 @@ func 变量声明() {
 	// 消费变量，go 语言中不允许有未使用的变量
 	fmt.Println(a, e, c, d, g)
 
+	// 如果只申明了没有赋值，会给每个类型默认的 “零值”
 	var i int
 	var f float64
 	var b bool
 	var s string
 	fmt.Printf("%v %v %v %q\n", i, f, b, s)
-}
 
-func 常量声明() {
-	fmt.Println("-- 常量声明 --")
-	const d = 4000
-	const f int = 5000
-	fmt.Println(d, f, s)
+	// 类型转换
+	var h = float64(g)
+	fmt.Printf("类型转换 %v", h)
 }
 
 func for循环() {
@@ -72,7 +71,7 @@ func for循环() {
 
 func ifelse分支() {
 	fmt.Println("-- if/else 结构 --")
-	// 在判断条件之前，可以使用一个表达式
+	// 在判断条件之前, 可以使用一个表达式, 表达式只可以使用 :=
 	if num := 9; num < 0 {
 		fmt.Println(num, "is negative")
 	} else if num < 10 {
@@ -84,17 +83,22 @@ func ifelse分支() {
 
 func switch分支() {
 	fmt.Println("-- switch 结构 --")
-	// go 语言的switch 的case 默认是自动跳过的，不想跳过可以使用 XXX 关键字
+	// go 语言的switch 的case 默认是自动跳过的，不想跳过可以使用 fallthrough 关键字,不过基本不使用，case可以多条件
 	num := 2
 	switch num {
 	case 1:
 		fmt.Println("one")
 	case 2:
 		fmt.Println("two")
+	case 3, 4:
+		fmt.Println("3 or 4")
+		fallthrough
+	case 5:
+		fmt.Println("5")
 	default:
-		fmt.Println("three")
+		fmt.Println("other")
 	}
-	whatAmI := func(i interface{}) {
+	whatAmI := func(i any) {
 		// switch 可以直接使用表达式的
 		switch t := i.(type) {
 		case bool:
@@ -108,6 +112,16 @@ func switch分支() {
 	whatAmI(true)
 	whatAmI(1)
 	whatAmI("hey")
+
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("早上好！")
+	case t.Hour() < 17:
+		fmt.Println("下午好！")
+	default:
+		fmt.Println("晚上好！")
+	}
 }
 
 func 数组结构() {
@@ -202,7 +216,13 @@ func goroutine() {
 
 func defer语法() {
 	fmt.Println("-- defer --")
-	defer fmt.Println("defer ")
+	// defer 语法需要的变量会在 defer语法 申明的时候捕获，比如说在defer改变变量后，也不会在defer语法中生效
+	num := 3
+	fun1 := func(num int) {
+		fmt.Println("fun1", num)
+	}
+	defer fun1(num)
+	num += 1
 	fmt.Println("func call")
 }
 
@@ -236,7 +256,7 @@ func 方法权限() {
 }
 
 func main() {
-	变量声明()
+	// 变量声明()
 	// 常量声明()
 	// for循环()
 	// ifelse分支()
@@ -250,7 +270,7 @@ func main() {
 	// 接口()
 	// goroutine()
 	// channel()
-	// defer语法()
+	defer语法()
 	// embed资源文件嵌入()
 	// panic语法()
 	// 方法权限()
