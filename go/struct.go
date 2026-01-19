@@ -47,6 +47,8 @@ func struct结构() {
 	fmt.Println(p2.age)
 	p2.age = 51
 	fmt.Println(p2.age)
+	p3 := newPerson("Tom")
+	fmt.Println(p3)
 
 	// struct 结构体的字面量表达方式
 	dog := struct {
