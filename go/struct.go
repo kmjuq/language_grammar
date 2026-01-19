@@ -20,8 +20,16 @@ type rect struct {
 }
 
 // 方法 是结构体的方法，当创建结构体时，可以直接通过结构体调用方法
+// 指针接收者：*rect
 func (r *rect) area() int {
+	r.width = 10 // 修改原对象的字段
 	return r.width * r.height
+}
+
+// 值接收者：rect（无*）
+func (r rect) perimeter() int {
+	r.height = 20 // 仅修改副本，原对象不受影响
+	return 2 * (r.width + r.height)
 }
 
 // 结构嵌入
@@ -60,12 +68,6 @@ func struct结构() {
 	}
 	fmt.Println(dog)
 
-	// 方法
-	r1 := rect{width: 10, height: 5}
-	fmt.Println(r1)
-	r2 := r1
-	fmt.Println(r2)
-
 	// 结构嵌入
 	co := container{
 		base: base{
@@ -82,4 +84,13 @@ func struct结构() {
 	}
 	var desc describer = co
 	fmt.Println("describer:", desc.describe())
+
+	r := rect{width: 5, height: 5}
+	// 调用指针接收者方法，原对象被修改
+	fmt.Println("area:", r.area())    // 输出：area: 50（width被改为10）
+	fmt.Println("原r.width:", r.width) // 输出：原r.width: 10（原对象已变）
+
+	// 调用值接收者方法，仅修改副本
+	fmt.Println("perimeter:", r.perimeter()) // 输出：perimeter: 60（height副本改为20）
+	fmt.Println("原r.height:", r.height)      // 输出：原r.height: 5（原对象不变）
 }
