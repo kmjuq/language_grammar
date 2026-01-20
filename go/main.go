@@ -98,20 +98,6 @@ func switch分支() {
 	default:
 		fmt.Println("other")
 	}
-	whatAmI := func(i any) {
-		// switch 可以直接使用表达式的
-		switch t := i.(type) {
-		case bool:
-			fmt.Println("I'm a bool")
-		case int:
-			fmt.Println("I'm an int")
-		default:
-			fmt.Printf("Don't know type %T\n", t)
-		}
-	}
-	whatAmI(true)
-	whatAmI(1)
-	whatAmI("hey")
 
 	t := time.Now()
 	switch {
@@ -171,9 +157,11 @@ func map结构() {
 	m["k2"] = 13
 	fmt.Println(m)
 	v1 := m["k1"]
-	v2, ok1 := m["k2"]
+	if v2, ok1 := m["k2"]; ok1 {
+		fmt.Println("v2:", v2)
+	}
 	_, ok2 := m["k3"]
-	fmt.Println(v1, v2, ok1, ok2)
+	fmt.Println(v1, ok2)
 	delete(m, "k2")
 	fmt.Println(m)
 	clear(m)
@@ -285,6 +273,31 @@ func 指针类型() {
 	fmt.Println(j) // 查看 j 的值
 }
 
+func 类型判断() {
+	var i any = "hello"
+
+	s := i.(string)
+	fmt.Println(s)
+
+	f, ok := i.(float64)
+	fmt.Println(f, ok)
+
+	whatAmI := func(i any) {
+		// switch 可以直接使用表达式的
+		switch t := i.(type) {
+		case bool:
+			fmt.Println("I'm a bool")
+		case int:
+			fmt.Println("I'm an int")
+		default:
+			fmt.Printf("Don't know type %T\n", t)
+		}
+	}
+	whatAmI(true)
+	whatAmI(1)
+	whatAmI("hey")
+}
+
 func main() {
 	// 变量声明()
 	// 常量声明()
@@ -292,17 +305,18 @@ func main() {
 	// ifelse分支()
 	// switch分支()
 	// 数组结构()
-	切片结构()
+	// 切片结构()
 	// map结构()
 	// range结构()
 	// 函数语法()
 	// struct结构()
-	// 接口()
-	// goroutine()
-	// channel()
+	goroutine()
+	channel()
 	// defer语法()
 	// embed资源文件嵌入()
 	// panic语法()
 	// 方法权限()
 	// 指针类型()
+	// 接口结构()
+	// 类型判断()
 }

@@ -19,10 +19,8 @@ func 函数语法() {
 	fmt.Println("zeroptr:", zval)
 	fmt.Println("pointer:", &zval)
 	// 闭包的使用
+	fmt.Println(intSeq()())
 	nextInt := intSeq()
-	fmt.Println(intSeq()())
-	fmt.Println(intSeq()())
-	fmt.Println(intSeq()())
 	fmt.Println(nextInt())
 	fmt.Println(nextInt())
 	fmt.Println(nextInt())
