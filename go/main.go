@@ -138,12 +138,28 @@ func 数组结构() {
 func 切片结构() {
 	fmt.Println("-- 切片结构 --")
 	// go 语言的切片就是内存地址的映射，本身不存储数据，可以通过切片来操作具体的内存数据
-	// 切片的声明
+	// 切片的声明, 切片的零值是 nil
 	var sliceA []string
 	fmt.Println("uninit:", sliceA, sliceA == nil, len(sliceA) == 0)
 	// 给切片申请内存
 	sliceA = make([]string, 3)
 	fmt.Println("emp:", sliceA, "len:", len(sliceA), "cap:", cap(sliceA))
+
+	// 切片字面量
+	primes := []int{2, 3, 5, 7, 11, 13}
+
+	var s []int = primes[1:4]
+	fmt.Println(s)
+	var s1 = primes[:4]
+	var s2 = primes[1:]
+	// 给切片添加元素，会直接覆盖切片后的原数组元素
+	s = append(s, 99)
+	fmt.Println(s)
+	var s3 = primes[:]
+	fmt.Println(s1, s2, s3)
+	// 切片的长度就是它所包含的元素个数。
+	// 切片的容量是从它的第一个元素开始数，到其底层数组元素末尾的个数。
+	fmt.Println(len(s1), cap(s1))
 }
 
 func map结构() {
@@ -276,11 +292,11 @@ func main() {
 	// ifelse分支()
 	// switch分支()
 	// 数组结构()
-	// 切片结构()
+	切片结构()
 	// map结构()
 	// range结构()
 	// 函数语法()
-	struct结构()
+	// struct结构()
 	// 接口()
 	// goroutine()
 	// channel()
@@ -288,5 +304,5 @@ func main() {
 	// embed资源文件嵌入()
 	// panic语法()
 	// 方法权限()
-	指针类型()
+	// 指针类型()
 }
