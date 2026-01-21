@@ -43,11 +43,31 @@ func channel() {
 		c2 <- "two"
 	}()
 	for i := 0; i < 2; i++ {
+		// select 会阻塞到某个分支可以继续执行为止，这时就会执行该分支。
+		// 当多个分支都准备好时会随机选择一个执行。
 		select {
 		case msg1 := <-c1:
 			fmt.Println("received", msg1)
 		case msg2 := <-c2:
 			fmt.Println("received", msg2)
+		}
+	}
+
+	// 当 select 中的其它分支都没有准备好时，default 分支就会执行。
+	// 为了在尝试发送或者接收时不发生阻塞，可使用 default 分支：
+	tick := time.Tick(100 * time.Millisecond)
+	boom := time.After(500 * time.Millisecond)
+loop:
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			break loop
+		default:
+			fmt.Println("    .")
+			time.Sleep(50 * time.Millisecond)
 		}
 	}
 
@@ -73,6 +93,8 @@ func channel() {
 		fmt.Println("sent job", j)
 	}
 	// close 函数会关闭channel，防止继续加入数据到channel中。
+	// 只应由发送者关闭信道，而不应由接收者关闭。
+	// 向一个已经关闭的信道发送数据会引发程序 panic。
 	close(jobs)
 	fmt.Println("sent all jobs")
 	<-doneChan
