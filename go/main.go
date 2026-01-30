@@ -3,6 +3,7 @@ package main
 import (
 	"embed"
 	"fmt"
+	"grammar/asm"
 	folderUtil "grammar/folder"
 	"time"
 )
@@ -298,25 +299,58 @@ func 类型判断() {
 	whatAmI("hey")
 }
 
+func 类型别名() {
+	fmt.Println("\n类型定义语法:")
+
+	// 类型定义
+	type MyInt int
+
+	// 类型别名
+	type IntAlias = int
+
+	var a MyInt = 42
+	var b IntAlias = 100
+	var c int = 200
+
+	fmt.Printf("MyInt: %d, 类型: %T\n", a, a)
+	fmt.Printf("IntAlias: %d, 类型: %T\n", b, b)
+	fmt.Printf("int: %d, 类型: %T\n", c, c)
+
+	// 类型别名可以直接赋值
+	b = c
+	fmt.Printf("IntAlias 赋值后: %d\n", b)
+
+	// 类型定义需要显式转换
+	// a = c // 编译错误
+	a = MyInt(c)
+	fmt.Printf("MyInt 转换后: %d\n", a)
+}
+
+// 核心：go generate 触发代码生成（零侵入，规范写法）
+//
+//go:generate go run ./gen/loggen.go -src=../struct.go
 func main() {
-	// 变量声明()
-	// 常量声明()
-	// for循环()
-	// ifelse分支()
-	// switch分支()
-	// 数组结构()
-	// 切片结构()
-	// map结构()
-	// range结构()
-	// 函数语法()
-	// struct结构()
+	变量声明()
+	常量声明()
+	for循环()
+	ifelse分支()
+	switch分支()
+	数组结构()
+	切片结构()
+	map结构()
+	range结构()
+	函数语法()
+	struct结构()
 	goroutine()
 	channel()
-	// defer语法()
-	// embed资源文件嵌入()
-	// panic语法()
-	// 方法权限()
-	// 指针类型()
-	// 接口结构()
-	// 类型判断()
+	defer语法()
+	embed资源文件嵌入()
+	panic语法()
+	方法权限()
+	指针类型()
+	接口结构()
+	类型判断()
+	类型别名()
+	asm.Asm汇编语法()
+	cgo语法()
 }

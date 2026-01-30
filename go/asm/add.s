@@ -1,0 +1,6 @@
+TEXT ·add(SB), $0-24
+	MOVQ	8(SP), AX
+	MOVQ	16(SP), BX
+	ADDQ	BX, AX
+	MOVQ	AX, 24(SP)
+	RET

@@ -93,4 +93,14 @@ func struct结构() {
 	// 调用值接收者方法，仅修改副本
 	fmt.Println("perimeter:", r.perimeter()) // 输出：perimeter: 60（height副本改为20）
 	fmt.Println("原r.height:", r.height)      // 输出：原r.height: 5（原对象不变）
+
+	// 方法值和方法表达式
+	pr := &rect{width: 3, height: 4}
+	perimeter := pr.perimeter
+	fmt.Println("方法值调用:", perimeter())
+
+	perimeterExpr1 := (*rect).perimeter
+	fmt.Println("方法表达式调用:", perimeterExpr1(pr))
+	perimeterExpr2 := rect.perimeter
+	fmt.Println("方法表达式调用:", perimeterExpr2(*pr))
 }

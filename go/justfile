@@ -1,2 +1,2 @@
 gorun:
-    go run main.go fun.go struct.go intf.go channel.go
+    CGO_ENABLED=1 && go run .
